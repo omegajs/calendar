@@ -22,7 +22,6 @@
 
 .u-calendar table {
 	border-collapse: collapse;
-	height: 140px;
 	position: absolute;
 	top: 20px
 }

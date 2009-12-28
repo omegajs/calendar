@@ -4,12 +4,7 @@ u.require('effects');
 
 new u.Module("calendar", { version: .1, hasCSS: !0 },
 // core
-{
-Date: {
-	lastDayOf: function (year, month) {
-		return new Date(new Date(yeah, month, 1) - 86400000).getDate(); }
-},
-Calendar: u.Class({
+{ Calendar: u.Class({
 	__init__: function () {
 		this.DOM = { main: u.DOM.create("div.u-calendar").hide() };
 		this.DOM.switcher = this.DOM.main.append("div.u-calendar-switcher");
@@ -20,24 +15,23 @@ Calendar: u.Class({
 		for (var w = -1, weeks = this.DOM.month.append("tr"); LC.DAYS[++w];)
 			weeks.append("th", LC.DAYS[w].slice(0, 3));
 
-		var today = new Date();
-		this.goTo(today);
+		this.goTo(this.date = new Date());
 	},
 
 	goTo: function (date) {
-		this.month(date.getFullYear(), date.getMonth());
-	},
+		this.month(date.getFullYear(), date.getMonth()); },
 
 	month: function (year, month) {
 		this.DOM.switcher.text(LC.MONTHS[month])
 		this.DOM.month.children().exclude(":first").remove(!0);
-		var
+		for (var day = 1, i = 0, w, d,
 		firstWeekDay = new Date(year, month, 1).getDay(),
-		l = new Date(new Date(year, month + 1, 1) - 86400000).getDate();
-		for (var day = 1, i = 0, w, d; day <= l; i++) {
+		last = new Date(new Date(year, month + 1, 1) - 86400000).getDate(); day <= last; i++) {
 			w = i % 7 ? w : this.DOM.month.append("tr");
 			d = w.append("td");
-			i >= firstWeekDay && d.text(day++) }
+			if (i >= firstWeekDay)
+				(function (d, day) { setTimeout(function () {
+					d.text(day).hide().fadeIn({ duration: 300 }); }, day * 15); })(d, day++); }
 	}
 })},
 
