@@ -11,28 +11,50 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		this.DOM.decade = this.DOM.main.append("table.u-calendar-decade");
 		this.DOM.year = this.DOM.main.append("table.u-calendar-year");
 		this.DOM.month = this.DOM.main.append("table.u-calendar-month");
+		this.DOM.buttons = this.DOM.main.append("div.u-calendar-buttons");
+		this.DOM.buttons.prev = this.DOM.buttons.append("button.u-calendar-buttons-prev", "«");
+		this.DOM.buttons.next = this.DOM.buttons.append("button.u-calendar-buttons-next", "»");
 
 		for (var w = -1, weeks = this.DOM.month.append("tr"); LC.DAYS[++w];)
 			weeks.append("th", LC.DAYS[w].slice(0, 3));
 
 		this.goTo(this.date = new Date());
+
+		var this_ = this;
+		this.DOM.buttons.prev.on('click', function () {
+			this_.prevMonth(); });
+		this.DOM.buttons.next.on('click', function () {
+			this_.nextMonth(); });
 	},
+
+	current: {
+		year: new Date().getFullYear(),
+		month: new Date().getMonth(),
+		day: new Date().getDate() },
 
 	goTo: function (date) {
 		this.month(date.getFullYear(), date.getMonth()); },
 
 	month: function (year, month) {
-		this.DOM.switcher.text(LC.MONTHS[month])
-		this.DOM.month.children().exclude(":first").remove(!0);
+		var date = new Date(year, month, 1);
+		this.current.year = date.getFullYear();
+		this.current.month = date.getMonth();
+		this.DOM.switcher.text(LC.MONTHS[this.current.month] + " " + this.current.year);
+		this.DOM.month.children().exclude(":first").remove();
 		for (var day = 1, i = 0, w, d,
-		firstWeekDay = new Date(year, month, 1).getDay(),
+		firstWeekDay = date.getDay(),
 		last = new Date(new Date(year, month + 1, 1) - 86400000).getDate(); day <= last; i++) {
 			w = i % 7 ? w : this.DOM.month.append("tr");
 			d = w.append("td");
 			if (i >= firstWeekDay)
 				(function (d, day) { setTimeout(function () {
-					d.text(day).hide().fadeIn({ duration: 300 }); }, day * 15); })(d, day++); }
-	}
+					d.text(day).hide().fadeIn({ duration: 300 }); }, day * 15); })(d, day++); }},
+
+	prevMonth: function () {
+		this.month(this.current.year, this.current.month - 1); },
+
+	nextMonth: function () {
+		this.month(this.current.year, this.current.month + 1); }
 })},
 
 // methods for elements

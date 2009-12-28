@@ -10,6 +10,16 @@
 	width: 180px
 }
 
+.u-calendar button {
+	background: none;
+	border: none
+}
+
+.u-calendar-buttons {
+	position: absolute;
+	top: 0
+}
+
 .u-calendar-switcher {
 	background: #aaa;
 	color: #fff;
