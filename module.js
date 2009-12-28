@@ -16,7 +16,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		date: new Date },
 
 	__init__: function (field) {
-		this.element = field;
+		(this.element = field).calendar = this;
 		this.DOM = { main: u.DOM.create("div.u-calendar").hide() };
 		this.DOM.switcher = this.DOM.main.append("div.u-calendar-switcher");
 		this.DOM.decade = this.DOM.main.append("table.u-calendar-decade");
@@ -30,14 +30,15 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 			weeks.append("th", LC.DAYS[w].slice(0, 2));
 
 		var this_ = this;
-		u(field).on('focus', function () { this_.open(); });
+		u(field).on('focus', u.Calendar.open);
 		this.DOM.buttons.prev.on('click', function () { this_.prevMonth(); });
 		this.DOM.buttons.next.on('click', function () { this_.nextMonth(); });
 	},
 
-	open: function () {
-		u("body").append(this.DOM.main).pos(['left', 'bottom+height'], this.element).show();
-		!this.DOM.switcher.text() && this.goTo(this.current.date); },
+	$open: function () {
+		var c = this.calendar;
+		u("body").append(c.DOM.main).pos(['left', 'bottom+height'], this).show();
+		!c.DOM.switcher.text() && c.goTo(c.current.date); },
 
 	goTo: function (date) {
 		this.month(date.getFullYear(), date.getMonth()); },
