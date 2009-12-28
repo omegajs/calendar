@@ -1,23 +1,23 @@
 .u-calendar {
 	background: #fff;
 	border: 1px solid #000;
-	color: #000;
-	font-size: 12px;
 	height: 160px;
 	overflow: hidden;
-	padding: 2px;
 	position: absolute;
-	width: 180px
+	width: 200px
+}
+
+.u-calendar * {
+	color: #000;
+	font-size: 11px;
+	margin: 0
 }
 
 .u-calendar button {
 	background: none;
-	border: none
-}
-
-.u-calendar-buttons {
-	position: absolute;
-	top: 0
+	border: none;
+	cursor: pointer;
+	padding: 0
 }
 
 .u-calendar-switcher {
@@ -32,10 +32,35 @@
 
 .u-calendar table {
 	border-collapse: collapse;
+	left: 50%;
+	margin-left: -85px;
 	position: absolute;
 	top: 20px
 }
 
-.u-calendar th, .u-calendar td {
-	padding: 2px
+.u-calendar td {
+	height: 22px;
+	padding: 0;
+	width: 24px;
+}
+.u-calendar td button {
+	background: #fff;
+	height: 22px;
+	width: 24px
+}
+.u-calendar td button:hover {
+	background: #ccc;
+	font-size: 14px
+}
+
+.u-calendar-buttons button {
+	background: red;
+	color: transparent;
+	height: 180px;
+	position: absolute;
+	top: 20px;
+	width: 15px
+}
+button.u-calendar-buttons-next {
+	right: 0
 }

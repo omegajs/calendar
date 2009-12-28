@@ -2,10 +2,21 @@ u.require('effects');
 
 (function () {
 
+var LC = {
+	MONTHS: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+	DAYS: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] }
+
 new u.Module("calendar", { version: .1, hasCSS: !0 },
 // core
 { Calendar: u.Class({
-	__init__: function () {
+	current: {
+		year: new Date().getFullYear(),
+		month: new Date().getMonth(),
+		day: new Date().getDate(),
+		date: new Date },
+
+	__init__: function (field) {
+		this.element = field;
 		this.DOM = { main: u.DOM.create("div.u-calendar").hide() };
 		this.DOM.switcher = this.DOM.main.append("div.u-calendar-switcher");
 		this.DOM.decade = this.DOM.main.append("table.u-calendar-decade");
@@ -16,21 +27,17 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		this.DOM.buttons.next = this.DOM.buttons.append("button.u-calendar-buttons-next", "»");
 
 		for (var w = -1, weeks = this.DOM.month.append("tr"); LC.DAYS[++w];)
-			weeks.append("th", LC.DAYS[w].slice(0, 3));
-
-		this.goTo(this.date = new Date());
+			weeks.append("th", LC.DAYS[w].slice(0, 2));
 
 		var this_ = this;
-		this.DOM.buttons.prev.on('click', function () {
-			this_.prevMonth(); });
-		this.DOM.buttons.next.on('click', function () {
-			this_.nextMonth(); });
+		u(field).on('focus', function () { this_.open(); });
+		this.DOM.buttons.prev.on('click', function () { this_.prevMonth(); });
+		this.DOM.buttons.next.on('click', function () { this_.nextMonth(); });
 	},
 
-	current: {
-		year: new Date().getFullYear(),
-		month: new Date().getMonth(),
-		day: new Date().getDate() },
+	open: function () {
+		u("body").append(this.DOM.main).pos(['left', 'bottom+height'], this.element).show();
+		!this.DOM.switcher.text() && this.goTo(this.current.date); },
 
 	goTo: function (date) {
 		this.month(date.getFullYear(), date.getMonth()); },
@@ -48,7 +55,9 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 			d = w.append("td");
 			if (i >= firstWeekDay)
 				(function (d, day) { setTimeout(function () {
-					d.text(day).hide().fadeIn({ duration: 300 }); }, day * 15); })(d, day++); }},
+					d.append("button", day).up().hide().fadeIn({ duration: 300 }); }, day * 15); })(d, day++); }
+		this.DOM.main.anim({ height: this.DOM.switcher.size().height + this.DOM.month.size().height });
+	},
 
 	prevMonth: function () {
 		this.month(this.current.year, this.current.month - 1); },
@@ -58,27 +67,12 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 })},
 
 // methods for elements
-{
-	calendar: function () {
-		return u(this).on('focus,blur', toggleCalendar); }
-},
+{},
 
 // initializer
 function () {
-	u(".calendar").calendar();
+	for (var i = -1, els = u(".calendar"); els[++i];)
+		new u.Calendar(els[i]);
 });
-
-function toggleCalendar(e) {
-	var c = this.calendar = this.calendar || new u.Calendar().DOM.main;
-	if (e.type == 'focus') {
-		u("body").append(c).pos(['left', 'bottom+height'], this).fadeIn({ duration: 200 }); }
-// 	else
-// 		c.fadeOut({ duration: 300, destroy: !0 });
-}
-
-var LC = {
-	MONTHS: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-	DAYS: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-}
 
 })()
