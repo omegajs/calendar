@@ -1,0 +1,32 @@
+.u-calendar {
+	background: #fff;
+	border: 1px solid #000;
+	color: #000;
+	font-size: 12px;
+	height: 160px;
+	overflow: hidden;
+	padding: 2px;
+	position: absolute;
+	width: 180px
+}
+
+.u-calendar-switcher {
+	background: #aaa;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+	height: 16px;
+	padding: 2px;
+	text-align: center
+}
+
+.u-calendar table {
+	border-collapse: collapse;
+	height: 140px;
+	position: absolute;
+	top: 20px
+}
+
+.u-calendar th, .u-calendar td {
+	padding: 2px
+}
