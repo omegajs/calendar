@@ -22,12 +22,14 @@
 
 .u-calendar-switcher {
 	background: #aaa;
+	text-align: center
+}
+.u-calendar-switcher button {
 	color: #fff;
 	cursor: pointer;
+	height: 20px;
 	font-weight: bold;
-	height: 16px;
-	padding: 2px;
-	text-align: center
+	padding: 2px
 }
 
 .u-calendar table {
@@ -50,6 +52,11 @@
 	font-size: 13px
 }
 
+.u-calendar-decade td, .u-calendar-decade td button {
+	height: 26px;
+	width: 34px
+}
+
 .u-calendar-year td, .u-calendar-year td button {
 	height: 26px;
 	width: 57px
@@ -63,7 +70,7 @@
 .u-calendar-buttons button {
 	background: red;
 	color: transparent;
-	height: 180px;
+	height: 40px;
 	position: absolute;
 	top: 20px;
 	width: 15px
