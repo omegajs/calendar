@@ -38,19 +38,26 @@
 	top: 20px
 }
 
-.u-calendar td {
-	height: 22px;
+.u-calendar th {
+	height: 18px;
 	padding: 0;
-	width: 24px;
 }
-.u-calendar td button {
-	background: #fff;
-	height: 22px;
-	width: 24px
+.u-calendar td {
+	padding: 0;
 }
 .u-calendar td button:hover {
 	background: #ccc;
 	font-size: 13px
+}
+
+.u-calendar-year td, .u-calendar-year td button {
+	height: 26px;
+	width: 57px
+}
+
+.u-calendar-month td, .u-calendar-month td button {
+	height: 22px;
+	width: 24px;
 }
 
 .u-calendar-buttons button {
