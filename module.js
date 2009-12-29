@@ -22,9 +22,10 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		this.DOM.year = this.DOM.main.append("table.u-calendar-year");
 		this.DOM.month = this.DOM.main.append("table.u-calendar-month");
 		this.DOM.buttonNext = this.DOM.main.append("button.u-calendar-button-next", "»");
+		this.DOM.weekDays = this.DOM.month.append("tr.u-calendar-weekdays");
 
-		for (var w = -1, weeks = this.DOM.month.append("tr"); LC.DAYS[++w];)
-			weeks.append("th", LC.DAYS[w].slice(0, 2));
+		for (var w = -1; LC.DAYS[++w];)
+			this.DOM.weekDays.append("th", LC.DAYS[w].slice(0, 2));
 
 		var this_ = this;
 		u(field).on('focus,click', function () { this_.open() });
@@ -35,7 +36,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 	},
 
 	open: function () {
-		u("body").append(this.DOM.main).pos(['left', 'bottom+height'], this.element).show();
+		u("body").append(this.DOM.main).pos(['left', 'bottom+height+2'], this.element).show();
 		!this.current.month && this.goTo(new Date); },
 
 	close: function () {
@@ -92,7 +93,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		this.DOM.switcher.text(from + " - " + (from + 19));
 		this.DOM.decade.empty();
 		for (var i = 0, r, y; i < 20; i++) {
-			r = i % 5 ? r : this.DOM.decade.append("tr");
+			r = i % 4 ? r : this.DOM.decade.append("tr");
 			y = r.append("td").append("button", from + i).hide();
 			(function (y, i) { setTimeout(function () {
 				y.fadeIn({ duration: 300 },

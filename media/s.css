@@ -1,15 +1,19 @@
 .u-calendar {
-	background: #fff;
-	border: 1px solid #000;
+	background: #d5d5d5 url("pics/bg.png") no-repeat;
+	border: 1px solid #999;
+	cursor: default;
 	height: 160px;
 	overflow: hidden;
+	padding: 5px 10px 10px;
 	position: absolute;
-	width: 200px
+	width: 180px;
+	border-radius: 5px;
+	-moz-border-radius: 5px
 }
 
 .u-calendar * {
 	color: #000;
-	font-size: 11px;
+	font: 11px "sans", "trebuchet ms";
 	margin: 0
 }
 
@@ -21,59 +25,71 @@
 }
 
 .u-calendar-switcher {
-	background: #aaa;
 	text-align: center
 }
 .u-calendar-switcher button {
-	color: #fff;
-	cursor: pointer;
-	height: 20px;
-	font-weight: bold;
-	padding: 2px
+	background: url("pics/more.png") no-repeat right center;
+	height: 18px;
+	padding: 2px 10px 10px 2px;
+}
+
+button.u-calendar-button-prev,
+button.u-calendar-button-next {
+	background: url("pics/buttons.png");
+	color: transparent;
+	height: 18px;
+	left: 10px;
+	position: absolute;
+	top: 4px;
+	width: 15px
+}
+button.u-calendar-button-next {
+	background-position: -15px 0;
+	left: auto;
+	right: 10px
 }
 
 .u-calendar table {
 	border-collapse: collapse;
 	left: 50%;
-	margin-left: -85px;
+	margin-left: -90px;
 	position: absolute;
-	top: 20px
 }
 
-.u-calendar th {
+.u-calendar th,
+.u-calendar td {
 	height: 18px;
 	padding: 0;
 }
-.u-calendar td {
-	padding: 0;
-}
+
 .u-calendar td button:hover {
-	background: #ccc
+	background: #ccc;
+	border: 1px solid #aaa
 }
 
-.u-calendar-decade td, .u-calendar-decade td button {
+.u-calendar-month td,
+.u-calendar-month td button {
+	font-size: 10px;
+	height: 20px;
+	width: 25px;
+}
+.u-calendar-weekdays {
+	border-bottom: 1px solid #bbb
+}
+.u-calendar-weekdays th {
+	color: #666;
+}
+
+.u-calendar-year td,
+.u-calendar-year td button {
+	font-size: 12px;
 	height: 26px;
-	width: 34px
+	width: 60px
 }
 
-.u-calendar-year td, .u-calendar-year td button {
+.u-calendar-decade td,
+.u-calendar-decade td button {
+	font-size: 12px;
 	height: 26px;
-	width: 57px
-}
-
-.u-calendar-month td, .u-calendar-month td button {
-	height: 22px;
-	width: 24px;
-}
-
-button.u-calendar-button-prev, button.u-calendar-button-next {
-	background: red;
-	color: transparent;
-	height: 40px;
-	position: absolute;
-	top: 20px;
-	width: 15px
-}
-button.u-calendar-button-next {
-	right: 0
+	width: 45px
 }
