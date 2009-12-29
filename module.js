@@ -37,7 +37,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 
 	open: function () {
 		u("body").append(this.DOM.main).pos(['left', 'bottom+height+2'], this.element).show();
-		!this.current.month && this.goTo(new Date); },
+		!this.DOM.switcher.text() && this.goTo(new Date); },
 
 	close: function () {
 		this.DOM.main.fadeOut({ duration: 200, destroy: !0 }); },

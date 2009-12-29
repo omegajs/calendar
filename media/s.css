@@ -62,9 +62,11 @@ button.u-calendar-button-next {
 	padding: 0;
 }
 
-.u-calendar td button:hover {
+.u-calendar td button:hover,
+.u-calendar td button:focus {
 	background: #ccc;
-	border: 1px solid #aaa
+	border: 1px solid #aaa;
+	outline: none
 }
 
 .u-calendar-month td,
