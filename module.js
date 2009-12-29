@@ -17,20 +17,20 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		(this.element = field).calendar = this;
 		this.DOM = { main: u.DOM.create("div.u-calendar").hide() };
 		this.DOM.switcher = this.DOM.main.append("div.u-calendar-switcher").append("button");
-		this.DOM.buttons = this.DOM.main.append("div.u-calendar-buttons");
-		this.DOM.buttons.prev = this.DOM.buttons.append("button.u-calendar-buttons-prev", "«");
+		this.DOM.buttonPrev = this.DOM.main.append("button.u-calendar-button-prev", "«");
 		this.DOM.decade = this.DOM.main.append("table.u-calendar-decade");
 		this.DOM.year = this.DOM.main.append("table.u-calendar-year");
 		this.DOM.month = this.DOM.main.append("table.u-calendar-month");
-		this.DOM.buttons.next = this.DOM.buttons.append("button.u-calendar-buttons-next", "»");
+		this.DOM.buttonNext = this.DOM.main.append("button.u-calendar-button-next", "»");
 
 		for (var w = -1, weeks = this.DOM.month.append("tr"); LC.DAYS[++w];)
 			weeks.append("th", LC.DAYS[w].slice(0, 2));
 
 		var this_ = this;
-		u(field).on('focus', function () { this_.open() });
-		this.DOM.buttons.prev.on('click', function () { this_.prevPage(); });
-		this.DOM.buttons.next.on('click', function () { this_.nextPage(); });
+		u(field).on('focus,click', function () { this_.open() });
+		this.DOM.buttonPrev.on('click', function () { this_.prevPage(); });
+		this.DOM.buttonNext.on('click', function () { this_.nextPage(); });
+		this.DOM.main.on('keydown', function (e) { this_.navigate(e); })
 		this.DOM.main.on('click', function (e) { this_.select(e); });
 	},
 
@@ -43,6 +43,13 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 
 	goTo: function (date) {
 		this.month(date.getFullYear(), date.getMonth(), date.getDate()); },
+
+	navigate: function (e) {
+		if (e.keyCode >= 37 && e.keyCode <= 40) {
+			e.preventDefault();
+			// TODO
+		}
+	},
 
 	select: function (e) {
 		var this_ = this;

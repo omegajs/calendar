@@ -48,8 +48,7 @@
 	padding: 0;
 }
 .u-calendar td button:hover {
-	background: #ccc;
-	font-size: 13px
+	background: #ccc
 }
 
 .u-calendar-decade td, .u-calendar-decade td button {
@@ -67,7 +66,7 @@
 	width: 24px;
 }
 
-.u-calendar-buttons button {
+button.u-calendar-button-prev, button.u-calendar-button-next {
 	background: red;
 	color: transparent;
 	height: 40px;
@@ -75,6 +74,6 @@
 	top: 20px;
 	width: 15px
 }
-button.u-calendar-buttons-next {
+button.u-calendar-button-next {
 	right: 0
 }
