@@ -50,6 +50,9 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 			e.preventDefault();
 			// TODO
 		}
+		else
+		if (e.keyCode == 27)
+			this.close();
 	},
 
 	select: function (e) {
