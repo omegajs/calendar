@@ -101,7 +101,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 			(function (y, i) { setTimeout(function () {
 				y.fadeIn({ duration: 300 },
 				selectYear == from + i ? function () { y[0].focus(); } : undefined);
-			}, i * 10); })(y, i); }
+			}, i * 15); })(y, i); }
 		this.DOM.main.anim({ height: this.DOM.switcher.size().height + this.DOM.decade.size().height });
 	},
 
@@ -117,7 +117,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 			(function (m, i) { setTimeout(function () {
 				m.fadeIn({ duration: 300 },
 				selectMonth == i ? function () { m[0].focus(); } : undefined);
-			}, i * 10); })(m, i); }
+			}, i * 20); })(m, i); }
 		this.DOM.main.anim({ height: this.DOM.switcher.size().height + this.DOM.year.size().height });
 	},
 
