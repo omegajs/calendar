@@ -2,13 +2,25 @@
 	background: #d5d5d5 url("pics/bg.png") no-repeat;
 	border: 1px solid #999;
 	cursor: default;
-	height: 160px;
+	height: 120px;
 	overflow: hidden;
 	padding: 5px 10px 10px;
 	position: absolute;
 	width: 180px;
 	border-radius: 5px;
 	-moz-border-radius: 5px
+}
+
+.u-calendar-trigger {
+	background: none;
+	border: none;
+	cursor: pointer;
+	line-height: 1em;
+	margin-left: .2em
+}
+.u-calendar-trigger img {
+	height: 1.5em;
+	width: 1.5em
 }
 
 .u-calendar * {
@@ -25,22 +37,22 @@
 }
 
 .u-calendar-switcher {
+	line-height: 26px;
 	text-align: center
 }
 .u-calendar-switcher button {
-	background: url("pics/more.png") no-repeat right center;
-	height: 18px;
-	padding: 2px 10px 10px 2px;
+	background: none;
+	height: 24px;
+	padding: 5px;
 }
 
 button.u-calendar-button-prev,
 button.u-calendar-button-next {
-	background: url("pics/buttons.png");
-	color: transparent;
+	background: none;
 	height: 18px;
 	left: 10px;
 	position: absolute;
-	top: 4px;
+	top: 8px;
 	width: 15px
 }
 button.u-calendar-button-next {
@@ -62,8 +74,8 @@ button.u-calendar-button-next {
 	padding: 0;
 }
 
-.u-calendar td button:hover,
-.u-calendar td button:focus {
+.u-calendar button:hover,
+.u-calendar button:focus {
 	background: #ccc;
 	border: 1px solid #aaa;
 	outline: none

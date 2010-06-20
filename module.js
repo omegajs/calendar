@@ -16,7 +16,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 	__init__: function (field) {
 		(this.element = field).calendar = this;
 		this.DOM = { main: u.DOM.create("div.u-calendar").hide() };
-		this.DOM.switcher = this.DOM.main.append("div.u-calendar-switcher").append("button");
+		this.DOM.switcher = this.DOM.main.append("div.u-calendar-switcher").prepend("button");
 		this.DOM.buttonPrev = this.DOM.main.append("button.u-calendar-button-prev", "«");
 		this.DOM.decade = this.DOM.main.append("table.u-calendar-decade");
 		this.DOM.year = this.DOM.main.append("table.u-calendar-year");
@@ -24,11 +24,18 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		this.DOM.buttonNext = this.DOM.main.append("button.u-calendar-button-next", "»");
 		this.DOM.weekDays = this.DOM.month.append("tr.u-calendar-weekdays");
 
+		this.DOM.trigger = u(field).after("button.u-calendar-trigger")
+			.add("img", null, {
+				src: u.__path__+'plugins/calendar/media/pics/icon.png' });
+
 		for (var w = -1; LC.DAYS[++w];)
 			this.DOM.weekDays.append("th", LC.DAYS[w].slice(0, 2));
 
 		var this_ = this;
-		u(field).on('focus,click', function () { this_.open() });
+		this.DOM.trigger.on('click', function (e) {
+			e.preventDefault();
+			this_[this_.DOM.main.is(":hidden") ? 'open': 'close'](); });
+
 		this.DOM.buttonPrev.on('click', function () { this_.prevPage(); });
 		this.DOM.buttonNext.on('click', function () { this_.nextPage(); });
 		this.DOM.main.on('keydown', function (e) { this_.navigate(e); })
@@ -36,8 +43,9 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 	},
 
 	open: function () {
+		u(".u-calendar").remove();
 		u("body").append(this.DOM.main).pos(['left', 'bottom+height+2'], this.element).show();
-		!this.DOM.switcher.text() && this.goTo(new Date); },
+		this.goTo(new Date(u(this.element).text() || +new Date)); },
 
 	close: function () {
 		this.DOM.main.fadeOut({ duration: 200, destroy: !0 }); },
@@ -109,7 +117,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		selectMonth = selectMonth || 0;
 		this.current.year = year;
 		this.current.month = undefined;
-		this.DOM.switcher.text(year);
+		this.DOM.switcher.text(year + "⌄");
 		this.DOM.year.empty();
 		for (var i = 0, r, m; i < 12; i++) {
 			r = i % 3 ? r : this.DOM.year.append("tr");
@@ -126,7 +134,7 @@ new u.Module("calendar", { version: .1, hasCSS: !0 },
 		var date = new Date(year, month, 1);
 		this.current.year = date.getFullYear();
 		this.current.month = date.getMonth();
-		this.DOM.switcher.text(LC.MONTHS[this.current.month] + " " + this.current.year);
+		this.DOM.switcher.text(LC.MONTHS[this.current.month] + " " + this.current.year + "⌄");
 		this.DOM.month.children().exclude(":first").remove();
 		for (var day = 1, i = 0, w, d,
 		firstWeekDay = date.getDay(),
